@@ -11,7 +11,7 @@ class ConnectionException(Exception):
     def __init__(self, host, port):
         # Call the base class constructor with the parameters it needs
         Exception.__init__(self, host, port)
-        self.message = 'Could not connect to host:port.  %s:%s'
+        self.message = 'Could not connect to %s:%s' % (host, port)
 
 
 class CredentialException(Exception):

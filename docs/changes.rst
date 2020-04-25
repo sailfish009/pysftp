@@ -2,7 +2,15 @@ Change Log
 ----------
 
 
-* 0.2.9 (current, released 2016-07-04)
+* 0.3.0 (development)
+
+  * Created more extensive documentation for CnOpt configuration options
+    released in v0.2.9
+  * bugfix: host and port information not displaying correctly in
+    ConnectionException (issue #92)
+  *
+
+* 0.2.9 (released 2016-07-04)
 
   * bugfix: correctly implement hostcheck. Now, be default pysftp will verify
     the host. See :attr:`pysftp.CnOpts.hostkeys`
