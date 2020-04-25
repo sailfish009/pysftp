@@ -8,7 +8,9 @@ Change Log
     released in v0.2.9
   * bugfix: host and port information not displaying correctly in
     ConnectionException (issue #92)
-  *
+  * added CnOpts.timeout - can now set time timeout in the .Connection method
+    instead of using the .Connection.timeout property.  Usage is
+    interchangeable. (issue #85)
 
 * 0.2.9 (released 2016-07-04)
 

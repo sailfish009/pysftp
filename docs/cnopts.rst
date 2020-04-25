@@ -223,3 +223,20 @@ SSHException will be raised, `paramiko.ssh_exception.SSHException: Incompatible
 ssh server (no acceptable ciphers)`
 
 
+CnOpts.timeout
+--------------
+Although you could set or retrieve the timeout via pysftp.Connection.timeout
+property since v0.2.7 there was request to allow setting the timeout via the
+CnOpts parameter.  Now you can use either or both methods.
+
+.. code-block:: pycon
+
+    >>> from __future__ import print_function
+    >>> import pysftp
+    >>> cnopts = pysftp.CnOpts()
+    >>> cnopts.timeout = 60.0  # by default, timeout is None, no timeout.
+    >>> with pysftp.Connection(host, username, password=password, cnopts=cnopts) as sftp:
+    ...     print(sftp.timeout)
+    ...
+    60.0
+ 

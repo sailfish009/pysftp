@@ -36,6 +36,8 @@ class CnOpts(object):   # pylint:disable=r0903
         transport, if set to True.
     :ivar list|None ciphers: initial value: None -
         List of ciphers to use in order.
+    :ivar float timeout: initial value: None - Enables setting the timeout for
+        the underlying channel.  Raises an exception if operation times out.
     :ivar paramiko.hostkeys.HostKeys|None hostkeys: HostKeys object to use for
         host key checking.
     :param filepath|None knownhosts: initial value: None - file to load
@@ -48,6 +50,7 @@ class CnOpts(object):   # pylint:disable=r0903
         self.log = False
         self.compression = False
         self.ciphers = None
+        self.timeout = None
         if knownhosts is None:
             knownhosts = known_hosts()
         self.hostkeys = HostKeys()
@@ -204,8 +207,9 @@ class Connection(object):   # pylint:disable=r0902,r0904
         """Establish the SFTP connection."""
         if not self._sftp_live:
             self._sftp = paramiko.SFTPClient.from_transport(self._transport)
+            channel = self._sftp.get_channel()
+            channel.settimeout(self._cnopts.timeout)
             if self._default_path is not None:
-                # print("_default_path: [%s]" % self._default_path)
                 self._sftp.chdir(self._default_path)
             self._sftp_live = True
 
@@ -1000,9 +1004,10 @@ class Connection(object):   # pylint:disable=r0902,r0904
     @timeout.setter
     def timeout(self, val):
         '''setter for timeout'''
-        self._sftp_connect()
-        channel = self._sftp.get_channel()
-        channel.settimeout(val)
+        self._cnopts.timeout = val
+        if self._sftp_live:  # if already live, modify exisint channel
+            channel = self._sftp.get_channel()
+            channel.settimeout(self._cnopts.timeout)
 
     @property
     def remote_server_key(self):

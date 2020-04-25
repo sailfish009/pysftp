@@ -1,19 +1,33 @@
 '''test pysftp.Connection.timeout - uses py.test'''
 
-from common import SKIP_IF_CI
+import copy
+
+from common import SFTP_REBEX
+import pysftp
 
 
-@SKIP_IF_CI
-def test_timeout_getter(lsftp):
+def test_timeout_getter():
     '''test getting the timeout value'''
-    # always starts at no timeout,
-    assert lsftp.timeout is None
+    with pysftp.Connection(**SFTP_REBEX) as sftp:
+        # always starts at no timeout,
+        assert sftp.timeout is None
 
 
-@SKIP_IF_CI
-def test_timeout_setter(lsftp):
+def test_timeout_setter(rsftp):
     '''test setting the timeout value'''
-    lsftp.timeout = 10.5
-    assert lsftp.timeout == 10.5
-    lsftp.timeout = None
-    assert lsftp.timeout is None
+    rsftp.timeout = 10.5
+    assert rsftp.timeout == 10.5
+    rsftp.timeout = None
+    assert rsftp.timeout is None
+
+
+def test_timeout_cnopts():
+    '''test setting the timeout value via CnOpts'''
+    cnopts = copy.copy(SFTP_REBEX['cnopts'])
+    SFTP_REBEX['cnopts'].timeout = 3.7
+    with pysftp.Connection(**SFTP_REBEX) as sftp:
+        # always starts at no timeout,
+        timeout_test = sftp.timeout == 3.7
+    SFTP_REBEX['cnopts'] = cnopts
+    assert timeout_test
+    assert SFTP_REBEX['cnopts'].timeout is None
