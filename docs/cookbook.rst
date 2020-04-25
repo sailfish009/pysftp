@@ -58,7 +58,7 @@ How about a ``paramiko.AgentKey`` ? no problem, just set the private_key equal t
 The connection object also allows you to use an IP Address for the ``host`` and
 you can set the ``port`` which defaults to 22, as well.
 
-:doc:`pysftp.CnOpts`
+:doc:`cnopts`
 -------------------------
 You can also specify additional connection options using the pysftp.CnOpts
 object. These options are advanced and not applicable to most uses, because of

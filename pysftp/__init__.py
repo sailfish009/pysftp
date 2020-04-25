@@ -12,6 +12,7 @@ import warnings
 import paramiko
 from paramiko import SSHException, AuthenticationException   # make available
 from paramiko import AgentKey, RSAKey, DSSKey
+from paramiko.hostkeys import HostKeys
 
 from pysftp.exceptions import (CredentialException, ConnectionException,
                                HostKeysException)
@@ -49,7 +50,7 @@ class CnOpts(object):   # pylint:disable=r0903
         self.ciphers = None
         if knownhosts is None:
             knownhosts = known_hosts()
-        self.hostkeys = paramiko.hostkeys.HostKeys()
+        self.hostkeys = HostKeys()
         try:
             self.hostkeys.load(knownhosts)
         except IOError:

@@ -50,6 +50,7 @@ Contents:
 
    cookbook
    pysftp
+   cnopts
    changes
    contributing
    authors
