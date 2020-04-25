@@ -129,6 +129,8 @@ it does exist, then it is overwritten with the new information.
 
 CnOpts.log
 ----------
+type: bool|str(path)
+
 By default, is False and no log file is created.  If set to True, then a temp
 file is created and used for logging.  You can get the name of the temp log
 file with .Connection().logfile .  Logging is often helpful if you are
@@ -160,6 +162,8 @@ filepath.
 
 CnOpts.compression
 ------------------
+type: bool
+
 Defaults to `False`.  Set to `True` to enable.  A little code to demonstrate:
 
 .. code-block:: pycon
@@ -180,6 +184,8 @@ Defaults to `False`.  Set to `True` to enable.  A little code to demonstrate:
 
 CnOpts.ciphers
 --------------
+type: tuple(str)
+
 It is important to note that you can not add ciphers with this option.  You
 can affect the order that ciphers are attempted or to remove specific ciphers
 from being used.
@@ -225,6 +231,8 @@ ssh server (no acceptable ciphers)`
 
 CnOpts.timeout
 --------------
+type: float
+
 Although you could set or retrieve the timeout via pysftp.Connection.timeout
 property since v0.2.7 there was request to allow setting the timeout via the
 CnOpts parameter.  Now you can use either or both methods.
@@ -239,4 +247,34 @@ CnOpts parameter.  Now you can use either or both methods.
     ...     print(sftp.timeout)
     ...
     60.0
- 
+
+CnOpts.default_window_size
+--------------------------
+type: int
+
+The default value is `paramiko.common.DEFAULT_WINDOW_SIZE` (2097152)
+
+**Modify at your own risk**
+
+.. danger::
+    From the Paramiko documentation: 
+        Modifying the the window and packet sizes might have adverse effects on your
+        channels created from this transport. The default values are the same as in the
+        OpenSSH code base and have been battle tested.
+
+CnOpts.default_max_packet_size
+------------------------------
+type: int
+
+The default value is `paramiko.common.DEFAULT_MAX_PACKET_SIZE` (32768)
+
+**Modify at your own risk**
+
+.. danger::
+    From the Paramiko documentation: 
+        Modifying the the window and packet sizes might have adverse effects on your
+        channels created from this transport. The default values are the same as in the
+        OpenSSH code base and have been battle tested.
+
+
+

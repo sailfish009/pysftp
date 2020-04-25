@@ -38,6 +38,10 @@ class CnOpts(object):   # pylint:disable=r0903
         List of ciphers to use in order.
     :ivar float timeout: initial value: None - Enables setting the timeout for
         the underlying channel.  Raises an exception if operation times out.
+    :ivar int default_window_size: initial value:
+        paramiko.common.DEFAULT_WINDOW_SIZE - Modify at your own risk.
+    :ivar int default_max_packet_size: initial value:
+        paramiko.common.DEFAULT_MAX_PACKET_SIZE - Modify at your own risk,
     :ivar paramiko.hostkeys.HostKeys|None hostkeys: HostKeys object to use for
         host key checking.
     :param filepath|None knownhosts: initial value: None - file to load
@@ -51,6 +55,8 @@ class CnOpts(object):   # pylint:disable=r0903
         self.compression = False
         self.ciphers = None
         self.timeout = None
+        self.default_max_packet_size = paramiko.common.DEFAULT_MAX_PACKET_SIZE
+        self.default_window_size = paramiko.common.DEFAULT_WINDOW_SIZE
         if knownhosts is None:
             knownhosts = known_hosts()
         self.hostkeys = HostKeys()
@@ -177,7 +183,11 @@ class Connection(object):   # pylint:disable=r0902,r0904
     def _start_transport(self, host, port):
         '''start the transport and set the ciphers if specified.'''
         try:
-            self._transport = paramiko.Transport((host, port))
+            self._transport = paramiko.Transport(
+                sock=(host, port),
+                default_window_size=self._cnopts.default_window_size,
+                default_max_packet_size=self._cnopts.default_max_packet_size
+            )
             # Set security ciphers if set
             if self._cnopts.ciphers is not None:
                 ciphers = self._cnopts.ciphers

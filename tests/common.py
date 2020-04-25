@@ -10,10 +10,14 @@ from pysftp import CnOpts
 SFTP_INTERNAL = {'host': 'localhost', 'username': 'user', 'password': 'pw'}
 # used if ptest-sftpserver plugin does not support what we are testing
 SFTP_LOCAL = {'host': 'localhost', 'username': 'test', 'password': 'test1357'}
+
+
 # connect to public rebex.net testing server
-SFTP_REBEX = {'host': 'test.rebex.net', 'username': 'demo',
-              'password': 'password',
-              'cnopts': CnOpts(knownhosts='test.rebex.net.pub')}
+def SFTP_REBEX():   # pylint:disable=c0103
+    '''return a param list for connecting to test.rebex.net'''
+    return {'host': 'test.rebex.net', 'username': 'demo',
+            'password': 'password',
+            'cnopts': CnOpts(knownhosts='test.rebex.net.pub')}
 
 # can only reach public, read-only server from CI platform, only test locally
 # if environment variable CI is set  to something to disable local tests

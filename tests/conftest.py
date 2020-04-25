@@ -16,6 +16,6 @@ def lsftp(request):
 @pytest.fixture(scope="session")
 def rsftp(request):
     '''setup a session long connection to the test.rebex.net sftp server'''
-    sftp = pysftp.Connection(**SFTP_REBEX)
+    sftp = pysftp.Connection(**SFTP_REBEX())
     request.addfinalizer(sftp.close)
     return sftp  # provide the fixture value

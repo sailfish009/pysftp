@@ -11,11 +11,13 @@ Change Log
   * added CnOpts.timeout - can now set time timeout in the .Connection method
     instead of using the .Connection.timeout property.  Usage is
     interchangeable. (issue #85)
+  * added `CnOpts.default_window_size` and `CnOpts.default_max_packet_size`.
+    (issue #91)
 
 * 0.2.9 (released 2016-07-04)
 
   * bugfix: correctly implement hostcheck. Now, be default pysftp will verify
-    the host. See :attr:`pysftp.CnOpts.hostkeys`
+    the host. See `pysftp.CnOpts.hostkeys`
   * added :meth:`pysftp.Connection.remote_server_key` - used to retrieve the
     remote hosts server key. 
   * added support for enabling compression, ``compression`` (J. Kruth)
