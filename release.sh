@@ -11,7 +11,7 @@ else
 fi
 
 if hg sum --remote
-    then echo "** no remote changegs **"
+    then echo "** no remote changes **"
     else
     echo "** FAIL ** repository out of sync"
     exit 1
