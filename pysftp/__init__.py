@@ -99,8 +99,6 @@ class Connection(object):   # pylint:disable=r0902,r0904
         The SSH port of the remote machine.
     :param str|None private_key_pass: *Default: None* -
         password to use, if private_key is encrypted.
-    :param list|None ciphers: *Deprecated* -
-        see ``pysftp.CnOpts`` and ``cnopts`` parameter
     :param None|CnOpts cnopts: *Default: None* - extra connection options
         set in a CnOpts object.
     :param str|None default_path: *Default: None* -
