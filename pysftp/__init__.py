@@ -410,7 +410,7 @@ class Connection(object):   # pylint:disable=r0902,r0904
                  recurse=False)
         for fname in wtcb.flist:
             src = os.path.join(localpath, fname)
-            dest = reparent(remotepath, fname)
+            dest = reparent(remotepath, fname, ospath=posixpath)
             # print('put', src, dest)
             self.put(src, dest, confirm=confirm, preserve_mtime=preserve_mtime)
 
@@ -445,7 +445,7 @@ class Connection(object):   # pylint:disable=r0902,r0904
         os.chdir(cur_local_dir)
         for dname in wtcb.dlist:
             if dname != '.':
-                pth = reparent(remotepath, dname)
+                pth = reparent(remotepath, dname, ospath=posixpath)
                 if not self.isdir(pth):
                     self.mkdir(pth)
 
@@ -454,10 +454,11 @@ class Connection(object):   # pylint:disable=r0902,r0904
             if head not in wtcb.dlist:
                 for subdir in path_advance(head):
                     if subdir not in wtcb.dlist and subdir != '.':
-                        self.mkdir(reparent(remotepath, subdir))
+                        self.mkdir(reparent(remotepath, subdir,
+                                            ospath=posixpath))
                         wtcb.dlist = wtcb.dlist + [subdir, ]
             src = os.path.join(localpath, fname)
-            dest = reparent(remotepath, fname)
+            dest = reparent(remotepath, fname, ospath=posixpath)
             # print('put', src, dest)
             self.put(src, dest, confirm=confirm, preserve_mtime=preserve_mtime)
 

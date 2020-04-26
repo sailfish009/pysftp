@@ -146,7 +146,7 @@ def path_retreat(thepath, sep=os.sep):
         parts = parts[:-1]
 
 
-def reparent(newparent, oldpath):
+def reparent(newparent, oldpath, ospath=os.path):
     '''when copying or moving a directory structure, you need to re-parent the
     oldpath.  When using os.path.join to calculate this new path, the
     appearance of a / root path at the beginning of oldpath, supplants the
@@ -161,7 +161,7 @@ def reparent(newparent, oldpath):
 
     if oldpath[0] in (posixpath.sep, ntpath.sep):
         oldpath = '.' + oldpath
-    return os.path.join(newparent, oldpath)
+    return ospath.join(newparent, oldpath)
 
 
 def walktree(localpath, fcallback, dcallback, ucallback, recurse=True):
