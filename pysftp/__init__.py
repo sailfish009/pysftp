@@ -118,7 +118,7 @@ class Connection(object):   # pylint:disable=r0902,r0904
     """
 
     def __init__(self, host, username=None, private_key=None, password=None,
-                 port=22, private_key_pass=None, ciphers=None, log=False,
+                 port=22, private_key_pass=None, log=False,
                  cnopts=None, default_path=None):
         # starting point for transport.connect options
         self._tconnect = {'username': username, 'password': password,
@@ -131,12 +131,6 @@ class Connection(object):   # pylint:disable=r0902,r0904
                    "Use cnopts param."
             warnings.warn(wmsg, DeprecationWarning)
             self._cnopts.log = log
-        # TODO: remove this if block and log param above in v0.3.0
-        if ciphers is not None:
-            wmsg = "ciphers parameter is deprecated and will be remove in "\
-                   "0.3.0. Use cnopts param."
-            warnings.warn(wmsg, DeprecationWarning)
-            self._cnopts.ciphers = ciphers
         # check that we have a hostkey to verify
         if self._cnopts.hostkeys is not None:
             self._tconnect['hostkey'] = self._cnopts.get_hostkey(host)
