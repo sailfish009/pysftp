@@ -6,8 +6,6 @@ import pytest
 
 from pysftp import CnOpts
 
-# pytest-sftpserver plugin information
-SFTP_INTERNAL = {'host': 'localhost', 'username': 'user', 'password': 'pw'}
 # used if ptest-sftpserver plugin does not support what we are testing
 SFTP_LOCAL = {'host': 'localhost', 'username': 'test', 'password': 'test1357'}
 

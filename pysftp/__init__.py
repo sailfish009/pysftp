@@ -101,8 +101,6 @@ class Connection(object):   # pylint:disable=r0902,r0904
         password to use, if private_key is encrypted.
     :param list|None ciphers: *Deprecated* -
         see ``pysftp.CnOpts`` and ``cnopts`` parameter
-    :param bool|str log: *Deprecated* -
-        see ``pysftp.CnOpts`` and ``cnopts`` parameter
     :param None|CnOpts cnopts: *Default: None* - extra connection options
         set in a CnOpts object.
     :param str|None default_path: *Default: None* -
@@ -118,19 +116,13 @@ class Connection(object):   # pylint:disable=r0902,r0904
     """
 
     def __init__(self, host, username=None, private_key=None, password=None,
-                 port=22, private_key_pass=None, log=False,
-                 cnopts=None, default_path=None):
+                 port=22, private_key_pass=None, cnopts=None,
+                 default_path=None):
         # starting point for transport.connect options
         self._tconnect = {'username': username, 'password': password,
                           'hostkey': None, 'pkey': None}
         self._cnopts = cnopts or CnOpts()
         self._default_path = default_path
-        # TODO: remove this if block and log param above in v0.3.0
-        if log:
-            wmsg = "log parameter is deprecated and will be remove in 0.3.0. "\
-                   "Use cnopts param."
-            warnings.warn(wmsg, DeprecationWarning)
-            self._cnopts.log = log
         # check that we have a hostkey to verify
         if self._cnopts.hostkeys is not None:
             self._tconnect['hostkey'] = self._cnopts.get_hostkey(host)

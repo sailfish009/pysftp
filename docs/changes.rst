@@ -15,6 +15,9 @@ Change Log
     (issue #91)
   * removed ciphers from the list of .Connection params, it is now available
     only through CnOpts. (Issue #59)
+  * removed log from the list of .Connection params, it is now available
+    only through CnOpts. (Issue #59)
+
 
 * 0.2.9 (released 2016-07-04)
 
