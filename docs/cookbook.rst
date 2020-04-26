@@ -109,8 +109,8 @@ OTHER AVAILABLE CONNECTION OPTIONS via CnOpts:
   * .compression - False (Default) no compression, True - enable compression 
   * .ciphers - replaces the ciphers parameter in the Connection method.
 
-* log and ciphers in the Connection parameter list are deprecated and will be
-  removed in version 0.3.0 Use the CnOpts to specify them.
+* log and ciphers in the Connection parameter list have been removed in version 
+  0.3.0 Use the CnOpts to specify them.
 
 Here is a common scenario, you have your connection information stored in a
 persistence mechanism, like `yamjam <http://yamjam.rtfd.org/>`_ and when you access

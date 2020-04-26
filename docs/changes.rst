@@ -13,6 +13,8 @@ Change Log
     interchangeable. (issue #85)
   * added `CnOpts.default_window_size` and `CnOpts.default_max_packet_size`.
     (issue #91)
+  * removed ciphers from the list of .Connection params, it is now available
+    only through CnOpts. (Issue #59)
 
 * 0.2.9 (released 2016-07-04)
 
