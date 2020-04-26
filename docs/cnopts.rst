@@ -72,7 +72,7 @@ not use this, read a bit further and a better solution will be presented.)
 .. code-block:: python
 
     import pysftp
-    cnopts = CnOpts()
+    cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
     with pysftp.Connection(host, username, password=password, cnopts=cnopts) as sftp:
         # HostKey checking is now disabled.
@@ -91,7 +91,7 @@ distribute.   You could also create a file programmaticaly, i.e.
 .. code-block:: python
 
     import pysftp
-    cnopts = CnOpts()
+    cnopts = pysftp.CnOpts()
     cnopts.hostkeys = None
     with pysftp.Connection(host, username, password=password, cnopts=cnopts) as sftp:
         # HostKey checking is now disabled.
@@ -107,7 +107,7 @@ distribute with your code.  It would be used like this:
 .. code-block:: python
 
     import pysftp
-    cnopts = CnOpts(knownhosts='myhost.pub')
+    cnopts = pysftp.CnOpts(knownhosts='myhost.pub')
     with pysftp.Connection(host, username, password=password, cnopts=cnopts) as sftp:
         # HostKey checked using information in myhost.pub
        pass
@@ -140,7 +140,7 @@ encountering issues connecting to or transferring files.
 
     from __future__ import print_function
     import pysftp
-    cnopts = CnOpts()
+    cnopts = pysftp.CnOpts()
     cnopts.log = True
     with pysftp.Connection(host, username, password=password, cnopts=cnopts) as sftp:
         print(sftp.logfile)  # prints the path and name of the temp logfile
@@ -154,7 +154,7 @@ filepath.
 
     from __future__ import print_function
     import pysftp
-    cnopts = CnOpts()
+    cnopts = pysftp.CnOpts()
     cnopts.log = '/path/to/my/logfile'
     with pysftp.Connection(host, username, password=password, cnopts=cnopts) as sftp:
         print(sftp.logfile)  # prints '/path/to/my/logfile'
