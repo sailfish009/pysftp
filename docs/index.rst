@@ -40,7 +40,7 @@ Additional Information
 requirements
 ------------
 
-  paramiko >= 1.15.2
+  paramiko >= 1.17
 
 
 Contents:
