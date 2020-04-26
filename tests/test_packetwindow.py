@@ -10,9 +10,7 @@ def test_defaults(rsftp):
     '''test the default window and packet size values'''
     channel = rsftp.sftp_client.get_channel()
     assert channel.in_window_size == DEFAULT_WINDOW_SIZE
-    # assert channel.out_window_size == DEFAULT_WINDOW_SIZE
     assert channel.in_max_packet_size == DEFAULT_MAX_PACKET_SIZE
-    # assert channel.out_max_packet_size == DEFAULT_MAX_PACKET_SIZE
 
 
 def test_windowpacket_cnopts():
@@ -22,5 +20,5 @@ def test_windowpacket_cnopts():
     args['cnopts'].default_window_size = 8 * 4096
     with pysftp.Connection(**args) as sftp:
         channel = sftp.sftp_client.get_channel()
-        assert channel.in_window_size == 8 * 4096
         assert channel.in_max_packet_size == 4096
+        assert channel.in_window_size == 8 * 4096
